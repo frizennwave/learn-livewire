@@ -50,6 +50,10 @@ class User extends Authenticatable implements PasskeyUser
         ];
     }
 
+    /**
+     * @return HasMany<Post>
+     */
+
     // relation with post
     public function posts(): HasMany
     {

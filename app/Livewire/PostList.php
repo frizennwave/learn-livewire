@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Post;
+use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -16,7 +17,7 @@ class PostList extends Component
 
     #[Layout('layouts.public')]
     #[Title('Blog')]
-    public function render()
+    public function render(): View
     {
         $posts = Post::with('user')
             ->where('status', 'published')
