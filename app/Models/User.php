@@ -51,10 +51,8 @@ class User extends Authenticatable implements PasskeyUser
     }
 
     /**
-     * @return HasMany<Post>
+     * @return HasMany<Post, $this>
      */
-
-    // relation with post
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);

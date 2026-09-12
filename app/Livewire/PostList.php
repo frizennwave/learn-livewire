@@ -33,7 +33,7 @@ class PostList extends Component
         ]);
     }
 
-    public function updatingSearch()
+    public function updatingSearch(): void
     {
         $this->resetPage();
     }

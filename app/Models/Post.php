@@ -17,7 +17,7 @@ class Post extends Model
     ];
 
     /**
-     * @return BelongsTo<User, Post>
+     * @return BelongsTo<User, $this>
      */
     public function user(): BelongsTo
     {
