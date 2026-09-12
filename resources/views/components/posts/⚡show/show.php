@@ -12,7 +12,7 @@ new #[Layout('layouts.public')] class extends Component
     {
         $this->post = Post::where('slug', $slug)
             ->where('status', 'published')
-            ->with('user')
+            ->with(['user', 'categories', 'tags'])
             ->firstOrFail();
     }
 };
