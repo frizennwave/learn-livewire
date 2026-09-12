@@ -48,11 +48,11 @@
                 <label for="content" class="block text-sm font-medium text-gray-700">
                     Content
                 </label>
-                <textarea id="content"
-                wire:model="content"
-                placeholder="Write your post content here..."
-                rows="12"
-                class="mt-1 p-1 bg-gray-50 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+                <div wire:ignore>
+                    <input type="hidden" name="content" id="x-content">
+                    <trix-editor input="x-content" class="trix-content" x-data
+                        x-on:trix-change="$wire.content = $event.target.value"></trix-editor>
+                </div>
 
                 @error('content')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>

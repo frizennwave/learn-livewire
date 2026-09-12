@@ -1,8 +1,14 @@
 <?php
 
+use App\Livewire\PostList;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'welcome')->name('home');
+Route::get('/', function () {
+    return redirect('/blog');
+})->name('home');
+
+Route::get('/blog', PostList::class)->name('blog.index');
+Route::livewire('/blog/{slug}', 'posts.show')->name('blog.show');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
@@ -15,5 +21,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::livewire('/users/create', 'users.create')->middleware('can:manage users')->name('users.create');
     Route::livewire('/users/{user}/edit', 'users.edit')->middleware('can:manage users')->name('users.edit');
 });
+
+Route::view('/version', 'welcome')->name('version');
 
 require __DIR__.'/settings.php';
