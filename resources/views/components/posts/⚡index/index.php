@@ -14,7 +14,7 @@ new class extends Component
 
     public function with(): array
     {
-        $query = Post::with('user')->latest();
+        $query = Post::with(['user', 'categories', 'tags'])->latest();
 
         // filter by search
         if ($this->search) {

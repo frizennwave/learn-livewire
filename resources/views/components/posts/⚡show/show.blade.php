@@ -28,7 +28,7 @@
         </header>
 
         <!-- Post Content -->
-        <div class="prose prose-lg prose-indigo max-w-none mb-12">
+        <div class="prose prose-lg prose-indigo max-w-none mb-12 overflow-x-auto">
             {!! $post->content !!}
         </div>
 

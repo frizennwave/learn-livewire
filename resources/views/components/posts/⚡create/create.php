@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -25,6 +27,21 @@ new class extends Component
     #[Validate('required|in:draft,published')]
     public string $status = 'draft';
 
+    #[Validate('required|array|min:1')]
+    public array $selectedCategories = [];
+
+    #[Validate('nullable|array')]
+    public array $selectedTags = [];
+
+    // get the categories and tags
+    public function with(): array
+    {
+        return [
+            'categories' => Category::all(),
+            'tags' => Tag::all(),
+        ];
+    }
+
     public function save()
     {
         $this->validate();
@@ -47,6 +64,13 @@ new class extends Component
         }
 
         $post->save();
+
+        // attach the categories and tags
+        $post->categories()->attach($this->selectedCategories);
+
+        if (! empty($this->selectedTags)) {
+            $post->tags()->attach($this->selectedTags);
+        }
 
         session()->flash('success', 'Post created successfully!');
 

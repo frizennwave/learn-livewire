@@ -90,6 +90,46 @@
                 </div>
             </div>
 
+            <!-- Categories -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Categories (Required)
+                </label>
+                <div class="space-y-2 max-h-48 overflow-y-auto border border-gray-300 rounded-md p-3">
+                    @foreach ($categories as $category)
+                        <label class="flex items-center">
+                            <input type="checkbox" wire:model="selectedCategories" value="{{ $category->id }}" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                            <span class="ml-3 flex items-center">
+                                <span class="inline-block w-3 h-3 rounded-full mr-2" style="background-color: {{ $category->color }};"></span>
+                                <span class="text-sm font-medium text-gray-700">{{ $category->name }}</span>
+                            </span>
+                        </label>
+                    @endforeach
+                </div>
+                @error('selectedCategories')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <!-- Tags -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Tags (Optional)
+                </label>
+                <div class="space-y-2 max-h-48 overflow-y-auto border border-gray-300 rounded-md p-3">
+                    @foreach ($tags as $tag)
+                        <label class="flex items-center">
+                            <input type="checkbox" wire:model="selectedTags" value="{{ $tag->id }}" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                            <span class="ml-3 text-sm font-medium text-gray-700">{{ $tag->name }}</span>
+                        </label>
+                    @endforeach
+                </div>
+                @error('selectedTags')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+                <p class="mt-1 text-sm text-gray-500">Select relevant tags to help readers find your content</p>
+            </div>
+
             <!-- Status -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">

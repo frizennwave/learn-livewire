@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
@@ -30,6 +32,12 @@ new class extends Component
 
     public string $existing_image = '';
 
+    #[Validate('required|array|min:1')]
+    public array $selectedCategories = [];
+
+    #[Validate('nullable|array')]
+    public array $selectedTags = [];
+
     public function mount(Post $post)
     {
         if (! auth()->user()->can('edit all posts') &&
@@ -43,6 +51,18 @@ new class extends Component
         $this->content = $post->content;
         $this->status = $post->status;
         $this->existing_image = $post->featured_image ?? '';
+
+        // load existing categories and tags
+        $this->selectedCategories = $post->categories->pluck('id')->toArray();
+        $this->selectedTags = $post->tags->pluck('id')->toArray();
+    }
+
+    public function with(): array
+    {
+        return [
+            'categories' => Category::all(),
+            'tags' => Tag::all(),
+        ];
     }
 
     public function update()
@@ -71,6 +91,10 @@ new class extends Component
         }
 
         $this->post->save();
+
+        // Sync categories and tags
+        $this->post->categories()->sync($this->selectedCategories);
+        $this->post->tags()->sync($this->selectedTags);
 
         session()->flash('success', 'Post updated successfully!');
 
