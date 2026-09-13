@@ -12,7 +12,7 @@
                 <!-- Search -->
                 <div class="mb-6">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Search</label>
-                    <input type="text" wire:model="search" placeholder="Search posts..." class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <input type="text" wire:model.live="search" placeholder="Search posts..." class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                 </div>
 
                 <!-- Categories -->
