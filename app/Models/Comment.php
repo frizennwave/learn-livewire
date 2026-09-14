@@ -45,12 +45,18 @@ class Comment extends Model
     }
 
     #[Scope]
+    /**
+    * @param Builder<Comment> $query
+    */
     public function approved(Builder $query): void
     {
         $query->where('status', 'approved');
     }
 
     #[Scope]
+    /**
+    * @param Builder<Comment> $query
+    */
     public function topLevel(Builder $query): void
     {
         $query->whereNull('parent_id');
