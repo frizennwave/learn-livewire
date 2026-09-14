@@ -11,7 +11,7 @@ Route::get('/blog', PostList::class)->name('blog.index');
 Route::livewire('/blog/{slug}', 'posts.show')->name('blog.show');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::view('dashboard', 'dashboard')->name('dashboard');
+    Route::livewire('/dashboard', 'dashboard')->name('dashboard');
 
     Route::livewire('/posts', 'posts.index')->middleware('can:create posts')->name('posts.index');
     Route::livewire('/posts/create', 'posts.create')->middleware('can:create posts')->name('posts.create');

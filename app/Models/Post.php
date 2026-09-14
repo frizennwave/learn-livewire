@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 use Override;
 
 #[Fillable(['user_id', 'title', 'slug', 'excerpt', 'content', 'featured_image',
-    'status', 'published_at'])]
+    'status', 'published_at', 'views_count'])]
 class Post extends Model
 {
     protected $casts = [
@@ -48,6 +48,14 @@ class Post extends Model
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * @return HasMany<PostView, $this>
+     */
+    public function views(): HasMany
+    {
+        return $this->hasMany(PostView::class);
     }
 
     // create slug
