@@ -44,19 +44,19 @@ class Comment extends Model
         return $this->hasMany(Comment::class, 'parent_id')->with('user', 'replies');
     }
 
-    #[Scope]
     /**
-    * @param Builder<Comment> $query
-    */
+     * @param  Builder<Comment>  $query
+     */
+    #[Scope]
     public function approved(Builder $query): void
     {
         $query->where('status', 'approved');
     }
 
-    #[Scope]
     /**
-    * @param Builder<Comment> $query
-    */
+     * @param  Builder<Comment>  $query
+     */
+    #[Scope]
     public function topLevel(Builder $query): void
     {
         $query->whereNull('parent_id');
