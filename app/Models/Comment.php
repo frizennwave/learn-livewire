@@ -45,13 +45,13 @@ class Comment extends Model
     }
 
     #[Scope]
-    public function approved(Builder $query)
+    public function approved(Builder $query): void
     {
         $query->where('status', 'approved');
     }
 
     #[Scope]
-    public function topLevel(Builder $query)
+    public function topLevel(Builder $query): void
     {
         $query->whereNull('parent_id');
     }
