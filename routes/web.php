@@ -25,6 +25,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::livewire('/categories', 'categories.index')->middleware('can:manage roles')->name('categories.index');
     Route::livewire('/categories/create', 'categories.create')->middleware('can:manage roles')->name('categories.create');
     Route::livewire('/categories/{category}/edit', 'categories.edit')->middleware('can:manage roles')->name('categories.edit');
+
+    // Comments routes
+    Route::livewire('/comments', 'comments.index')->middleware('can:create posts')->name('comments.index');
 });
 
 Route::view('/version', 'welcome')->name('version');

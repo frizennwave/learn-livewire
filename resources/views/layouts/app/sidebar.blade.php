@@ -32,6 +32,11 @@
                             {{ __('Categories') }}
                         </flux:sidebar.item>
                     @endcan
+                    @can('create posts')
+                         <flux:sidebar.item icon="chat-bubble-left-right" :href="route('comments.index')" :current="request()->routeIs('comments.index')" wire:navigate>
+                            {{ __('Comments') }}
+                        </flux:sidebar.item>
+                    @endcan
                 </flux:sidebar.group>
             </flux:sidebar.nav>
 
