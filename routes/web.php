@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\PostList;
+use App\Models\Subscriber;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -9,6 +10,17 @@ Route::get('/', function () {
 
 Route::get('/blog', PostList::class)->name('blog.index');
 Route::livewire('/blog/{slug}', 'posts.show')->name('blog.show');
+
+Route::get('/unsubscribe/{token}', function ($token) {
+    $subscriber = Subscriber::where('token', $token)->firstOrFail();
+    if ($subscriber) {
+        $subscriber->delete();
+
+        return view('unsubscribed');
+    }
+
+    abort(404);
+})->name('unsubscribe');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::livewire('/dashboard', 'dashboard')->name('dashboard');
