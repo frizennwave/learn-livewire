@@ -27,7 +27,7 @@ class Subscriber extends Model
     }
 
     // required for sending notifications to subscriber
-    public function routeNotificationForMail()
+    public function routeNotificationForMail(): ?string
     {
         return $this->email;
     }

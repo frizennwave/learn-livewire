@@ -13,13 +13,9 @@ Route::livewire('/blog/{slug}', 'posts.show')->name('blog.show');
 
 Route::get('/unsubscribe/{token}', function ($token) {
     $subscriber = Subscriber::where('token', $token)->firstOrFail();
-    if ($subscriber) {
-        $subscriber->delete();
+    $subscriber->delete();
 
-        return view('unsubscribed');
-    }
-
-    abort(404);
+    return view('unsubscribed');
 })->name('unsubscribe');
 
 Route::middleware(['auth', 'verified'])->group(function () {
